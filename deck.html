@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Signal: 7-slide demo</title>
+<style>
+  @font-face { font-family:"Fraunces"; src:url("assets/fonts/Fraunces-latin.woff2") format("woff2"); font-weight:100 900; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Fraunces"; src:url("assets/fonts/Fraunces-italic-latin.woff2") format("woff2"); font-weight:100 900; font-style:italic; font-display:swap; }
+  @font-face { font-family:"Noto Sans"; src:url("assets/fonts/NotoSans-500-latin.woff2") format("woff2"); font-weight:500; font-display:swap; }
+  :root { --ground:#050506; --ink:#f1ece4; --soft:#b9b2a8; --serif:"Fraunces", Georgia, serif; --sans:"Noto Sans", Arial, sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; overflow-x:clip; background:#000; color:var(--ink); }
+  #stage { position:absolute; left:50%; top:50%; width:1920px; height:1080px; transform-origin:0 0; background:var(--ground); overflow:hidden; font-family:var(--serif); }
+  .s { position:absolute; inset:0; display:none; }
+  .s.on { display:block; }
+  .bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .shade { position:absolute; inset:0; background:linear-gradient(to right, rgba(0,0,0,.88), rgba(0,0,0,.35) 70%, rgba(0,0,0,.2)); }
+  .t { position:absolute; left:130px; font-weight:300; line-height:1.08; }
+  .p { position:absolute; left:130px; font-family:var(--sans); font-weight:500; font-size:40px; line-height:1.4; color:var(--soft); max-width:1100px; }
+  .small { font-size:30px; }
+  .grid { position:absolute; left:130px; top:250px; width:1660px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:26px; }
+  .tile { position:relative; height:330px; overflow:hidden; background:#111; }
+  .tile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .tile:after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.05) 65%); }
+  .tile b { position:absolute; left:22px; top:14px; z-index:2; font-family:var(--serif); font-weight:400; font-size:64px; }
+  .tile span { position:absolute; left:22px; bottom:16px; right:22px; z-index:2; font-family:var(--sans); font-weight:500; font-size:26px; line-height:1.3; }
+  .row { position:absolute; left:130px; width:1660px; display:flex; gap:60px; }
+  .row div { flex:1; font-family:var(--sans); font-weight:500; font-size:34px; line-height:1.4; color:var(--soft); }
+  .row b { display:block; font-family:var(--serif); font-weight:400; font-size:54px; color:var(--ink); margin-bottom:14px; }
+  #notes { position:fixed; left:0; right:0; bottom:0; background:rgba(0,0,0,.92); color:#fff; font:20px/1.45 "Noto Sans", Arial, sans-serif; padding:14px 24px; display:none; z-index:9; }
+  #hint { position:fixed; left:12px; bottom:10px; font:14px "Noto Sans", Arial, sans-serif; color:#777; z-index:8; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1 title -->
+  <section class="s on" data-n="Hi, I'm John. This is Last Signal. It's a story about six NASA machines that stopped answering. It's for the discarded equipment storytelling challenge.">
+    <img class="bg" src="assets/pioneer10-whole.jpg" style="object-position:50% 45%;scale:1.6;opacity:.38" alt="">
+    <div class="shade"></div>
+    <div class="t" style="top:300px;font-size:210px;">Last Signal</div>
+    <div class="p" style="top:560px;color:var(--ink);">Six NASA machines that went quiet</div>
+    <div class="p small" style="top:700px;">NASA Space Apps 2026<br>John Tewolde, team Fourteen Days Dark<br>Challenge: NASA's discarded equipment storytelling</div>
+  </section>
+
+  <!-- 2 six machines -->
+  <section class="s" data-n="Six machines. Apollo 11 and Apollo 12 on the Moon. Opportunity, InSight and Ingenuity on Mars. And Pioneer 10, far out in space. Each one has a last-contact date, and the site shows each date with a real NASA photo.">
+    <div class="t" style="top:90px;font-size:100px;">Six machines. Six last signals.</div>
+    <div class="grid">
+      <div class="tile"><img src="assets/apollo11-easep.jpg" style="object-position:30% 55%" alt=""><b>1969</b><span>Apollo 11 stopped accepting commands, 27 August</span></div>
+      <div class="tile"><img src="assets/bean-alsep.jpg" style="object-position:52% 78%" alt=""><b>1977</b><span>Apollo 12 was shut down, 30 September</span></div>
+      <div class="tile"><img src="assets/pioneer10-whole.jpg" style="object-position:50% 40%" alt=""><b>2003</b><span>Pioneer 10 sent its last signal, 23 January</span></div>
+      <div class="tile"><img src="assets/opportunity.jpg" style="object-position:50% 40%" alt=""><b>2018</b><span>Opportunity last heard, 10 June, in a dust storm</span></div>
+      <div class="tile"><img src="assets/insight.jpg" style="object-position:50% 28%" alt=""><b>2022</b><span>InSight's last contact, 15 December</span></div>
+      <div class="tile"><img src="assets/ingenuity.jpg" style="object-position:47% 45%" alt=""><b>2024</b><span>Ingenuity's mission ended, 25 January</span></div>
+    </div>
+  </section>
+
+  <!-- 3 the idea -->
+  <section class="s" data-n="The idea is simple. You scroll, and each machine gets one photo and one date, with a line running through all of them. The last thing each one said is what you see.">
+    <img class="bg" src="assets/opportunity.jpg" style="object-position:50% 40%;opacity:.45" alt="">
+    <div class="shade"></div>
+    <div class="t" style="top:250px;font-size:120px;">One scroll.<br>One photo each.<br>One date each.</div>
+    <div class="p" style="top:700px;">A single line runs through the whole story, and the years thin out as the machines get older.</div>
+  </section>
+
+  <!-- 4 NASA data -->
+  <section class="s" data-n="Everything is from NASA. The photographs come from NASA's image library. The dates come from NASA mission pages. And Pioneer 10's distance comes from NASA JPL Horizons.">
+    <div class="t" style="top:110px;font-size:110px;">Built on NASA's own material</div>
+    <div class="row" style="top:420px;">
+      <div><b>Photographs</b>Ten real NASA photos from the NASA Image and Video Library.</div>
+      <div><b>Mission pages</b>Every date and claim is checked against a saved NASA page.</div>
+      <div><b>JPL Horizons</b>Pioneer 10's distance from Earth for any day, from NASA/JPL.</div>
+    </div>
+  </section>
+
+  <!-- 5 send a signal -->
+  <section class="s" data-n="At the end, you can send a signal to Pioneer 10. It's about 141 times farther from the Sun than Earth is. Light takes about 19.6 hours to get there. A reply would take another 19.6 hours. Nothing answers.">
+    <div class="t" style="top:130px;font-size:110px;">Send a signal to Pioneer 10</div>
+    <div style="position:absolute;left:300px;top:560px;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #bcd8ff, #3f78d6 60%, #17356b);box-shadow:0 0 30px rgba(120,170,255,.55);"></div>
+    <div style="position:absolute;left:344px;top:581px;width:1230px;height:2px;background:rgba(236,231,220,.4);"></div>
+    <div style="position:absolute;left:1566px;top:572px;width:20px;height:20px;border-radius:50%;background:#d9d4c9;box-shadow:0 0 18px rgba(255,255,255,.6);"></div>
+    <div class="p small" style="left:240px;top:640px;">Earth</div>
+    <div class="p small" style="left:1450px;top:640px;">Pioneer 10, about 141 AU away</div>
+    <div class="p" style="top:780px;max-width:1660px;color:var(--ink);font-family:var(--serif);font-weight:300;font-size:58px;line-height:1.2;">About 19.6 hours there. Another 19.6 hours back.<br><i>Nothing answers.</i></div>
+  </section>
+
+  <!-- 6 real and made -->
+  <section class="s" data-n="What's real: the photos, the dates and the distance. What's made: the sounds, and the reply, which is a simulation, nothing is actually transmitted. I wrote it with AI tools, I checked every fact, and there are no AI-made images in the site.">
+    <div class="t" style="top:110px;font-size:110px;">What is real, what is made</div>
+    <div class="row" style="top:400px;">
+      <div><b>Real</b>NASA photographs, last-contact dates, and Pioneer 10's distance from NASA/JPL Horizons.</div>
+      <div><b>Made</b>The sound is generated in the browser. The signal and the silence are a simulation of the delay; nothing is transmitted.</div>
+      <div><b>AI use</b>Code, text and concept were drafted with AI tools (Claude Code) and checked by me. The music in the video was composed with AI-written code.</div>
+    </div>
+  </section>
+
+  <!-- 7 links -->
+  <section class="s" data-n="Thanks. The site and the video are both public, and the links are on screen.">
+    <img class="bg" src="assets/pioneer10-whole.jpg" style="object-position:50% 45%;scale:1.6;opacity:.3" alt="">
+    <div class="shade"></div>
+    <div class="t" style="top:240px;font-size:150px;">Last Signal</div>
+    <div class="p" style="top:520px;color:var(--ink);">coderjt-elite.github.io/last-signal</div>
+    <div class="p small" style="top:620px;">30-second video: link on the submission page (Google Drive)</div>
+    <div class="p small" style="top:760px;">John Tewolde, team Fourteen Days Dark. Not affiliated with NASA. No NASA logos used.</div>
+  </section>
+</div>
+
+<div id="notes"></div>
+<div id="hint">Right arrow, space or click: next. Left arrow: back. N: speaker notes. F: full screen.</div>
+<script>
+  var slides = [].slice.call(document.querySelectorAll('.s')), i = 0, stage = document.getElementById('stage');
+  function fit() { var k = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = 'scale(' + k + ') translate(-50%,-50%)'; stage.style.transformOrigin = '0 0'; stage.style.left = '50%'; stage.style.top = '50%'; }
+  function go(n) { i = Math.max(0, Math.min(slides.length - 1, n)); slides.forEach(function (s, k) { s.classList.toggle('on', k === i); }); document.getElementById('notes').textContent = (i + 1) + '/7: ' + slides[i].getAttribute('data-n'); }
+  addEventListener('resize', fit); fit(); go(0);
+  addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { go(i + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(i - 1); }
+    else if (e.key === 'n' || e.key === 'N') { var n = document.getElementById('notes'); n.style.display = n.style.display === 'block' ? 'none' : 'block'; }
+    else if (e.key === 'f' || e.key === 'F') { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
+  });
+  addEventListener('click', function () { go(i + 1); });
+</script>
+</body>
+</html>

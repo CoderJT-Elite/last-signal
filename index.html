@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Signal</title>
+<meta name="description" content="Six machines NASA left behind went quiet in six different ways. Scroll through the last thing each one said.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Last Signal">
+<meta property="og:description" content="Six machines NASA left behind went quiet in six different ways. Scroll through the last thing each one said, then send a signal to Pioneer 10.">
+<meta property="og:image" content="https://coderjt-elite.github.io/last-signal/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050506'/%3E%3Cpath d='M2 16h4l2-7 3 14 3-18 3 22 3-14 2 5h8' fill='none' stroke='%23f1ece4' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/bootprint.jpg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="world" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="hud">
+  <div class="hud-id" aria-live="off">
+    <span class="hud-name" id="hudName">Last Signal</span>
+    <span class="hud-days" id="hudDays"></span>
+  </div>
+  <button id="soundBtn" class="hud-btn" type="button" aria-pressed="false">Sound off</button>
+</header>
+
+<main id="story">
+
+  <!-- Stillness -->
+  <section class="act" id="a-hero" data-k="1.2429" data-span="1.87">
+    <div class="stage">
+      <div class="line c" data-at="0.00 0.47 0.00 0.12"><h1 class="big intro">Six machines are still out there.</h1></div>
+      <div class="line c" data-at="0.35 0.87 0.12 0.00"><p class="big">Each one stopped answering in its own way.</p></div>
+      <div class="enter" data-at="0.00 0.45 0.00 0.10">
+        <button id="enterSound" class="btn" type="button">Begin with sound</button>
+        <button id="enterQuiet" class="btn btn-quiet" type="button">Begin in silence</button>
+        <p class="tiny">A story for NASA Space Apps Challenge 2026. All sound is synthesized.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview: six frames, each one darker than the last, with one signal line running through them (canvas design S2) -->
+  <section class="act" id="a-signal" data-span="8">
+    <div class="stage stage-signal">
+      <div class="sg-frames">
+        <figure class="sg-fr" style="--b:1;--s:1">
+          <div class="sg-im"><img src="assets/apollo11-easep.jpg" style="object-position:30% 55%" alt="Apollo 11 science station on the Moon, with an astronaut and the lunar module behind it." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:60px;font-size:min(clamp(120px,22vw,300px),36vh);font-weight:900">1969</p>
+          <div class="line sg-sub" data-at="0.00 0.95 0.00 0.14"><p><span>Apollo 11 stopped accepting commands on 27 August 1969.</span></p></div>
+        </figure>
+        <figure class="sg-fr" style="--b:.92;--s:.9">
+          <div class="sg-im"><img src="assets/bean-alsep.jpg" style="object-position:52% 80%" alt="Apollo 12 science station instruments standing on the Moon." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:70px;font-size:min(clamp(100px,18vw,240px),32vh);font-weight:700;font-style:italic">1977</p>
+          <div class="line sg-sub" data-at="0.85 1.95 0.14 0.14"><p><span>Apollo 12 was shut down on 30 September 1977.</span></p></div>
+        </figure>
+        <figure class="sg-fr" style="--b:.84;--s:.82">
+          <div class="sg-im"><img src="assets/opportunity.jpg" style="object-position:50% 40%" alt="Opportunity rover on Mars, covered in dust." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:80px;font-size:min(clamp(90px,15vw,200px),28vh);font-weight:500">2018</p>
+          <div class="line sg-sub" data-at="1.85 2.95 0.14 0.14"><p><span>Opportunity was last heard on 10 June 2018, in a dust storm.</span></p></div>
+        </figure>
+        <figure class="sg-fr" style="--b:.74;--s:.7">
+          <div class="sg-im"><img src="assets/insight.jpg" style="object-position:50% 25%" alt="InSight lander on Mars, its solar panels covered in dust." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:90px;font-size:min(clamp(80px,12vw,160px),24vh);font-weight:300">2022</p>
+          <div class="line sg-sub" data-at="2.85 3.95 0.14 0.14"><p><span>InSight made its last contact on 15 December 2022.</span></p></div>
+        </figure>
+        <figure class="sg-fr" style="--b:.64;--s:.55">
+          <div class="sg-im"><img src="assets/ingenuity.jpg" style="object-position:47% 45%" alt="The Ingenuity helicopter standing on the surface of Mars." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:100px;font-size:min(clamp(70px,9vw,120px),18vh);font-weight:200;font-style:italic">2024</p>
+          <div class="line sg-sub" data-at="3.85 4.95 0.14 0.14"><p><span>Ingenuity's mission ended on 25 January 2024.</span></p></div>
+        </figure>
+        <figure class="sg-fr" style="--b:.5;--s:.3">
+          <div class="sg-im"><img src="assets/pioneer10-whole.jpg" style="object-position:47% 54%;scale:1.6" alt="Pioneer 10 spacecraft with its dish and booms, in an assembly hall before launch." decoding="async"></div>
+          <p class="sg-yr" aria-hidden="true" style="top:110px;font-size:min(clamp(56px,6vw,80px),12vh);font-weight:100">2003</p>
+          <div class="line sg-sub" data-at="4.85 5.95 0.14 0.14"><p><span>Pioneer 10 sent its last signal on 23 January 2003.</span></p></div>
+        </figure>
+        <figure class="sg-fr sg-stars" style="--b:1;--s:1">
+          <div class="sg-im"></div>
+          <div class="line sg-end" data-at="5.85 7.00 0.14 0.00"><p>It is still going.</p></div>
+        </figure>
+      </div>
+      <div class="sg-track" aria-hidden="true">
+        <svg viewBox="0 0 1280 4480" preserveAspectRatio="none" focusable="false">
+          <path class="sg-path" pathLength="1" d="M640 0 C640 80 940 80 940 160 C940 320 380 320 380 480 C380 640 880 640 880 800 C880 960 440 960 440 1120 C440 1280 810 1280 810 1440 C810 1600 490 1600 490 1760 C490 1920 760 1920 760 2080 C760 2240 540 2240 540 2400 C540 2560 710 2560 710 2720 C710 2880 590 2880 590 3040 C590 3200 670 3200 670 3360 C670 3520 625 3520 625 3680 C625 3840 646 3840 646 4000 C646 4160 640 4160 640 4320 L640 4480"/>
+        </svg>
+        <i class="sg-dot" style="left:73.44%;top:3.571%;--d:12px"></i>
+        <i class="sg-dot" style="left:68.75%;top:17.857%;--d:12px"></i>
+        <i class="sg-dot" style="left:63.28%;top:32.143%;--d:10px"></i>
+        <i class="sg-dot" style="left:59.375%;top:46.429%;--d:10px"></i>
+        <i class="sg-dot" style="left:55.47%;top:60.714%;--d:8px"></i>
+        <i class="sg-dot" style="left:52.34%;top:75%;--d:7px"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wonder: Apollo 11 -->
+  <section class="act" id="a-apollo11" data-k="1.4200" data-span="3.13" data-machine="apollo11">
+    <div class="stage">
+      <img class="bg bg-boot" src="assets/bootprint.jpg" alt="A bootprint in gray lunar soil, photographed during Apollo 11." decoding="async">
+      <div class="bg bg-aldrin-wrap"><img class="bg-aldrin" src="assets/aldrin.jpg" alt="Astronaut Buzz Aldrin standing on the Moon beside a leg of the lunar module." decoding="async"></div>
+      <div class="scrim scrim-l"></div>
+      <div class="line bl" data-at="0.00 0.65 0.00 0.12">
+        <p class="date">20 July 1969</p>
+        <h2 class="mid">Eagle was the first crewed vehicle to land on the Moon.</h2>
+      </div>
+      <div class="line bl" data-at="0.53 1.32 0.12 0.12">
+        <p class="body">The astronauts left a small science station behind. EASEP had a seismometer to feel moonquakes.</p>
+      </div>
+      <div class="line bl" data-at="1.20 2.13 0.12 0.00">
+        <p class="body">Neil Armstrong and Buzz Aldrin were the first people to walk on the Moon. 21.55 kg of lunar rock and soil came home with them. EASEP stayed.</p>
+      </div>
+      <p class="credit">Apollo 11, NASA</p>
+    </div>
+  </section>
+
+  <!-- Unease: the night -->
+  <section class="act" id="a-night" data-k="1.1500" data-span="2.15" data-machine="apollo11">
+    <div class="stage">
+      <div class="counter" data-at="0.00 1.15 0.00 0.00">
+        <span class="count" id="nightCount">0</span>
+        <span class="count-label">days of silence since 27 August 1969</span>
+      </div>
+      <div class="line tl" data-at="0.00 0.51 0.00 0.14"><p class="body">EASEP could only run in lunar daylight.</p></div>
+      <div class="line br" data-at="0.37 1.15 0.14 0.00"><p class="body">On 27 August 1969 it stopped accepting commands from Earth. The NASA page we used does not say why.</p></div>
+    </div>
+  </section>
+
+  <!-- Apollo 12: flow -->
+  <section class="flow" id="a-apollo12" data-machine="apollo12">
+    <div class="flow-grid">
+      <figure class="flow-fig seen-fx">
+        <img src="assets/bean-alsep.jpg" alt="Astronaut Alan Bean standing beside gold-wrapped science instruments on the Moon, with a long shadow in the foreground." decoding="async">
+        <figcaption>Alan Bean deploys parts of ALSEP, Apollo 12, 19 November 1969. NASA/JSC.</figcaption>
+      </figure>
+      <div class="flow-copy seen-fx">
+        <p class="date">Apollo 12</p>
+        <h2 class="mid">This one left a whole station.</h2>
+        <p class="body">ALSEP had a seismometer, an ion detector and other instruments wired to a central station. A small nuclear generator powered it with about 70 watts, roughly one bright light bulb.</p>
+        <p class="body">When the crew's spent lander was crashed into the Moon on purpose, about 60 km away, the station recorded the first artificial moonquake.</p>
+        <p class="body">It worked for almost eight years. It was shut down on 30 September 1977, along with the other Apollo science stations. The NASA page we used does not say why.</p>
+        <p class="clock"><span id="a12days">0</span> days since it was switched off</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hope: Mars rail -->
+  <section class="act" id="a-mars" data-span="3" data-machine="opportunity">
+    <div class="stage stage-mars">
+      <div class="rail" id="rail">
+        <div class="panel panel-title">
+          <p class="date">Mars</p>
+          <h2 class="huge">Opportunity</h2>
+          <p class="body">A solar-powered robot geologist on wheels, one of two twins.</p>
+        </div>
+        <figure class="panel panel-photo">
+          <img src="assets/opportunity.jpg" alt="Opportunity's self-portrait: the rover and its solar panels covered in a layer of red dust, on Mars." decoding="async">
+          <figcaption>Opportunity's self-portrait, January 2014, about three weeks before it finished a decade of work on Mars. NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.</figcaption>
+        </figure>
+        <div class="panel panel-text">
+          <p class="body lead">It was sent to look for signs of past water on Mars.</p>
+          <p class="body">By studying the rocks, the twins confirmed that water was long standing on the surface of Mars in ancient times.</p>
+        </div>
+        <div class="panel panel-text panel-dust">
+          <h3 class="mid">Then the dust came.</h3>
+          <p class="body">Opportunity last communicated with Earth on 10 June 2018, as a planet-wide dust storm blanketed the place where the solar-powered rover sat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grief -->
+  <section class="act" id="a-grief" data-k="0.9375" data-span="1.75" data-machine="opportunity">
+    <div class="stage">
+      <div class="thumbs" data-at="0.00 0.75 0.00 0.14" role="img" aria-label="Two small gray photographs, the last images Opportunity took, nearly dark with a faint dot of Sun near the middle of each.">
+        <div class="thumb thumb-a"></div>
+        <div class="thumb thumb-b"></div>
+      </div>
+      <div class="line bl" data-at="0.00 0.75 0.00 0.00">
+        <p class="date">10 June 2018</p>
+        <h2 class="mid">The last two images it took. A faint Sun sits near the middle of each.</h2>
+        <p class="body"><span id="oppDays">0</span> days of silence so far.</p>
+      </div>
+      <p class="credit">Last images from Opportunity. NASA/JPL-Caltech/Cornell/ASU</p>
+    </div>
+  </section>
+
+  <!-- Tenderness: InSight -->
+  <section class="act" id="a-insight" data-k="1.5400" data-span="3.31" data-machine="insight">
+    <div class="stage stage-insight">
+      <img class="bg bg-insight" src="assets/insight.jpg" alt="InSight's final selfie: a Mars lander with both circular solar panels dulled by a thick layer of dust." decoding="async">
+      <div class="scrim scrim-b"></div>
+      <div class="line bl" data-at="0.00 0.67 0.00 0.12">
+        <p class="date">InSight, Mars</p>
+        <h2 class="mid">It stayed in one spot and listened to the planet from the inside.</h2>
+      </div>
+      <div class="line bl" data-at="0.55 1.30 0.12 0.12">
+        <p class="body">Its final selfie, 24 April 2022. Far more dust than in its first.</p>
+      </div>
+      <div class="line bl" data-at="1.18 2.31 0.12 0.00">
+        <p class="body">Dust covered its solar panels. Two attempts to reach the lander failed, and controllers concluded its batteries had run out of energy. The last contact was 15 December 2022. NASA ended the mission six days later.</p>
+      </div>
+      <p class="credit">InSight, NASA/JPL-Caltech</p>
+    </div>
+  </section>
+
+  <!-- Tenderness: Ingenuity -->
+  <section class="act" id="a-ingenuity" data-k="1.3818" data-span="4.04" data-machine="ingenuity">
+    <div class="stage">
+      <img class="bg bg-ing" id="ingImg" src="assets/ingenuity.jpg" alt="Perseverance's selfie on Mars, with the small Ingenuity helicopter standing on the ground in the distance." decoding="async">
+      <div class="scrim scrim-b"></div>
+      <div class="line bl" data-at="0.00 0.60 0.00 0.12">
+        <p class="date">Ingenuity, Mars</p>
+        <h2 class="mid">A small helicopter, carried to Mars as a technology demonstration.</h2>
+      </div>
+      <div class="line bl" data-at="0.48 1.38 0.12 0.12">
+        <p class="body">It was planned to make no more than five test flights in 30 days.</p>
+        <p class="bigcount"><span id="flightCount">0</span> flights</p>
+        <p class="body">across nearly three years.</p>
+      </div>
+      <div class="line bl" data-at="1.26 2.23 0.12 0.12">
+        <p class="body">On 18 January 2024 it made its last flight. About 1 meter up, it lost contact with the rover that relays its signals.</p>
+      </div>
+      <div class="line bl" data-at="2.11 3.04 0.12 0.00">
+        <p class="body">Later pictures showed one or more rotor blades damaged in landing. NASA ended the mission on 25 January 2024, with the helicopter still upright and in communication.</p>
+      </div>
+      <p class="credit">Perseverance selfie with Ingenuity, 6 April 2021, about 13 feet (3.9 m) from the rover. NASA/JPL-Caltech/MSSS</p>
+    </div>
+  </section>
+
+  <!-- Authored silence -->
+  <section class="act" id="a-silence" data-k="1.0333" data-span="1.31">
+    <div class="stage">
+      <div class="line c" data-silent data-at="0.00 0.31 0.00 0.00"><p class="mid-big">Now the farthest one.</p></div>
+    </div>
+  </section>
+
+  <!-- PEAK: Pioneer 10 -->
+  <section class="act" id="a-pioneer" data-k="1.2475" data-span="6.40" data-machine="pioneer10">
+    <div class="stage stage-pioneer">
+      <div class="plate" id="plate">
+        <img src="assets/pioneer-plaque.jpg" alt="A black and white photograph of the Pioneer 10 spacecraft before launch, with its small engraved plaque visible in the middle of the frame." decoding="async">
+      </div>
+      <div class="line tl" data-at="0.00 0.49 0.00 0.14">
+        <p class="date">Pioneer 10</p>
+        <h2 class="mid">Launched 2 March 1972.</h2>
+      </div>
+      <div class="line bl" data-at="0.35 1.12 0.14 0.14"><p class="body">The plaque is the small rectangle in the middle of the frame.</p></div>
+      <div class="line c-left" data-at="0.98 1.89 0.14 0.14">
+        <h2 class="mid">The first spacecraft to fly past Jupiter.</h2>
+        <p class="body">It was designed for 21 months. It lasted more than 30 years.</p>
+      </div>
+      <div class="line c-left" data-at="1.75 2.65 0.14 0.14">
+        <p class="date">23 January 2003</p>
+        <h2 class="mid">Its last, very weak signal, from 7.6 billion miles away.</h2>
+        <p class="body">Its power source had decayed.</p>
+      </div>
+      <div class="line c-left" data-at="2.51 3.80 0.14 0.14">
+        <p class="date">On 14 November 2026</p>
+        <h2 class="mid">About <span id="auNow">141</span> AU from Earth.</h2>
+        <p class="body">A radio message sent now would take about <span id="delayNow">19.6 hours</span> to get there. The distance is computed by NASA/JPL Horizons. Nobody has heard from it since 2003.</p>
+      </div>
+      <div class="line c-left peak" data-at="3.66 5.40 0.14 0.00">
+        <h2 class="mid">NASA's Deep Space Network did not detect a signal on 7 February 2003.</h2>
+        <p class="body">A final search in March 2006 failed. Pioneer 10 will coast silently toward the red star Aldebaran, about 68 light years away. NASA says it will take over 2 million years.</p>
+        <button type="button" id="sendBtn" class="send">Send a signal to Pioneer 10</button>
+        <p class="body send-out" id="sendOut" aria-live="polite"></p>
+      </div>
+      <p class="pulse-note" data-at="2.61 3.80 0.14 0.14">Our signal, leaving. Nothing comes back.</p>
+    </div>
+  </section>
+
+  <!-- Resolve -->
+  <section class="act" id="a-end" data-k="1.2100" data-span="2.21">
+    <div class="stage">
+      <div class="line c" data-at="0.00 0.51 0.00 0.14"><h2 class="big">Six machines. Five ways to go quiet.</h2></div>
+      <div class="endings" data-at="0.37 1.21 0.14 0.00">
+        <ul id="endings"></ul>
+        <p class="final">They went quiet. What they taught us did not.</p>
+        <p class="tiny"><a href="#sources" id="toSources">Sources, credits and the exact NASA sentences</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="sources" id="sources" aria-labelledby="srcTitle">
+  <div class="sources-in">
+    <h2 id="srcTitle" class="mid">Sources, credits and honesty notes</h2>
+    <p class="body">Every fact on this page comes from a NASA page saved with its web address. Open a machine to see the exact sentences copied from NASA.</p>
+    <div id="receipts"></div>
+
+    <h3 class="sub">What is synthesized and what is not</h3>
+    <p class="body">All sound is made live in your browser. It is not a NASA recording, and the fading pulse is invented. The photographs are real NASA images. The distance of Pioneer 10 is computed by NASA/JPL Horizons for 14 November 2026. Where a NASA page did not say why a machine stopped, this page says so instead of guessing. The silence counters use the UTC calendar day.</p>
+
+    <h3 class="sub">Image credits</h3>
+    <ul class="credits">
+      <li>Bootprint, Apollo 11 (AS11-40-5877). NASA.</li>
+      <li>Buzz Aldrin near the lunar module, Apollo 11 (AS11-40-5902). NASA/JSC.</li>
+      <li>Astronaut Edwin Aldrin after deployment of EASEP on the surface of the Moon, Apollo 11 (AS11-40-5948). NASA/JSC.</li>
+      <li>Alan Bean and ALSEP, Apollo 12 (AS12-47-6919). NASA/JSC.</li>
+      <li>Opportunity self-portrait (PIA17759). NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.</li>
+      <li>Last images Opportunity took (PIA22930). NASA/JPL-Caltech/Cornell/ASU.</li>
+      <li>InSight's final selfie (PIA25287). NASA/JPL-Caltech.</li>
+      <li>Perseverance's selfie with Ingenuity (PIA24542). NASA/JPL-Caltech/MSSS.</li>
+      <li>Pioneer 10 with its plaque (ARC-1972-A72-2137). NASA Ames Research Center archive.</li>
+      <li>Pioneer 10 spacecraft in an assembly hall (ARC-1973-AC73-9019). NASA Ames Research Center archive.</li>
+    </ul>
+    <p class="body">Images are from the NASA Image and Video Library (images.nasa.gov). No NASA logos are used. This project is not affiliated with or endorsed by NASA.</p>
+
+    <h3 class="sub">How it was made</h3>
+    <p class="body">Built for NASA Space Apps Challenge 2026 by team Fourteen Days Dark. Code and writing were drafted with SI (super intelligence) tools, specifically Claude Code, and then checked against the saved NASA pages. No AI-generated images, audio or video are used.</p>
+  </div>
+</section>
+
+<nav class="rail-nav" id="railNav" aria-label="Jump to a machine"></nav>
+<canvas id="trace" aria-hidden="true"></canvas>
+
+<script src="data.js"></script>
+<script src="audio.js"></script>
+<script src="story.js"></script>
+</body>
+</html>
